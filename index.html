@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Patamsetti Sai Bhargav | Data Scientist</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --navy:#0d2149;--navy2:#1a3566;--accent:#2563eb;--accent2:#3b82f6;
+    --white:#fff;--light:#f4f7fc;--gray:#64748b;--text:#1e293b;--border:#e2e8f0;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);background:var(--white);overflow-x:hidden}
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  .reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .7s ease,transform .7s ease}
+  .reveal-left.visible{opacity:1;transform:translateX(0)}
+  .reveal-right{opacity:0;transform:translateX(40px);transition:opacity .7s ease,transform .7s ease}
+  .reveal-right.visible{opacity:1;transform:translateX(0)}
+  .stagger>*{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+  .stagger.visible>*:nth-child(1){opacity:1;transform:none;transition-delay:.05s}
+  .stagger.visible>*:nth-child(2){opacity:1;transform:none;transition-delay:.15s}
+  .stagger.visible>*:nth-child(3){opacity:1;transform:none;transition-delay:.25s}
+  .stagger.visible>*:nth-child(4){opacity:1;transform:none;transition-delay:.35s}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:0;width:100%;background:rgba(13,33,73,.96);backdrop-filter:blur(12px);z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3);transition:background .3s}
+  .nav-inner{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px}
+  .logo{color:#fff;font-weight:800;font-size:1.1rem;letter-spacing:.5px}
+  .logo span{color:#93c5fd}
+  .nav-links{display:flex;gap:1.6rem;list-style:none}
+  .nav-links a{color:rgba(255,255,255,.78);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s;position:relative;padding-bottom:3px}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:#93c5fd;transition:width .3s}
+  .nav-links a:hover{color:#fff}
+  .nav-links a:hover::after{width:100%}
+
+  /* ── HERO ── */
+  #hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#1e4da0 100%);
+        min-height:100vh;display:flex;align-items:center;padding-top:60px;position:relative;overflow:hidden}
+  #hero::before{content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse at 70% 50%,rgba(59,130,246,.18) 0%,transparent 60%);pointer-events:none}
+  /* floating blobs */
+  .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.18;animation:floatBlob 8s ease-in-out infinite alternate}
+  .blob1{width:400px;height:400px;background:#3b82f6;top:-80px;right:-80px;animation-delay:0s}
+  .blob2{width:300px;height:300px;background:#6366f1;bottom:40px;left:-60px;animation-delay:2s}
+  @keyframes floatBlob{from{transform:translateY(0) scale(1)}to{transform:translateY(30px) scale(1.08)}}
+  .hero-inner{max-width:1100px;margin:auto;padding:4rem 2rem;display:flex;flex-direction:column;gap:1.2rem;position:relative;z-index:1}
+  .hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9);
+    padding:.35rem 1rem;border-radius:24px;font-size:.8rem;letter-spacing:1px;font-weight:600;width:fit-content;
+    animation:fadeDown .8s ease .2s both}
+  .pulse-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;animation:pulse 1.5s infinite}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.7}}
+  .hero-name{font-size:clamp(2.2rem,5vw,3.6rem);color:#fff;font-weight:800;line-height:1.1;
+    animation:fadeDown .8s ease .4s both}
+  .hero-name span{color:#93c5fd}
+  .hero-typewriter{color:rgba(255,255,255,.8);font-size:1.1rem;font-weight:500;min-height:1.8rem;
+    animation:fadeDown .8s ease .6s both}
+  .hero-typewriter .cursor{display:inline-block;width:2px;height:1.1em;background:#93c5fd;margin-left:2px;animation:blink .7s infinite;vertical-align:middle}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  .hero-sub{color:rgba(255,255,255,.68);font-size:1rem;max-width:540px;line-height:1.8;animation:fadeDown .8s ease .8s both}
+  .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.5rem;animation:fadeDown .8s ease 1s both}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+  .btn{padding:.72rem 1.7rem;border-radius:8px;font-weight:700;font-size:.9rem;cursor:pointer;text-decoration:none;border:none;transition:all .25s;display:inline-flex;align-items:center;gap:.4rem}
+  .btn-primary{background:var(--accent2);color:#fff;box-shadow:0 4px 14px rgba(59,130,246,.4)}
+  .btn-primary:hover{background:#2563eb;transform:translateY(-2px);box-shadow:0 6px 20px rgba(59,130,246,.5)}
+  .btn-outline{border:2px solid rgba(255,255,255,.45);color:#fff;background:transparent}
+  .btn-outline:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+  .hero-stats{display:flex;gap:2.5rem;margin-top:1rem;animation:fadeDown .8s ease 1.1s both}
+  .stat{text-align:center}
+  .stat-num{font-size:1.6rem;font-weight:800;color:#93c5fd}
+  .stat-lbl{font-size:.75rem;color:rgba(255,255,255,.6);font-weight:500;margin-top:.1rem}
+
+  /* ── SECTIONS ── */
+  section{padding:5rem 2rem}
+  .container{max-width:1100px;margin:auto}
+  .section-label{font-size:.75rem;font-weight:700;letter-spacing:2.5px;color:var(--accent);text-transform:uppercase;margin-bottom:.4rem}
+  .section-title{font-size:clamp(1.6rem,3vw,2rem);font-weight:800;color:var(--navy);margin-bottom:.3rem}
+  .divider{width:50px;height:4px;background:linear-gradient(90deg,var(--accent),#6366f1);border-radius:2px;margin:.6rem 0 2.8rem}
+
+  /* ── ABOUT ── */
+  #about{background:var(--light)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+  .about-text p{color:var(--gray);line-height:1.9;font-size:.96rem;margin-bottom:1rem}
+  .about-details{display:flex;flex-direction:column;gap:.8rem}
+  .detail-row{display:flex;gap:.9rem;align-items:flex-start;font-size:.9rem;
+    padding:.8rem;border-radius:10px;background:#fff;border:1px solid var(--border);
+    transition:box-shadow .2s,transform .2s}
+  .detail-row:hover{box-shadow:0 4px 14px rgba(37,99,235,.1);transform:translateX(4px)}
+  .detail-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#6366f1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+  .detail-row div b{display:block;font-size:.73rem;color:var(--gray);font-weight:600;margin-bottom:.1rem;text-transform:uppercase;letter-spacing:.5px}
+
+  /* ── SKILLS ── */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+  .skill-card{background:var(--light);border-radius:14px;padding:1.5rem;border:1px solid var(--border);
+    transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+  .skill-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--accent),#6366f1);border-radius:14px 14px 0 0}
+  .skill-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(37,99,235,.12)}
+  .skill-card h4{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+  .skill-card h4 span{font-size:1.15rem}
+  .tags{display:flex;flex-wrap:wrap;gap:.5rem}
+  .tag{background:#dbeafe;color:#1d4ed8;border-radius:20px;padding:.25rem .75rem;font-size:.76rem;font-weight:600;transition:background .2s}
+  .tag:hover{background:#bfdbfe}
+
+  /* ── PROJECTS ── */
+  #projects{background:var(--light)}
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+  .proj-card{background:#fff;border-radius:16px;border:1px solid var(--border);padding:1.7rem;display:flex;flex-direction:column;gap:.85rem;
+    transition:box-shadow .3s,transform .3s;position:relative;overflow:hidden}
+  .proj-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(37,99,235,.04),transparent);
+    opacity:0;transition:opacity .3s}
+  .proj-card:hover{box-shadow:0 12px 36px rgba(37,99,235,.14);transform:translateY(-5px)}
+  .proj-card:hover::after{opacity:1}
+  .proj-badge{font-size:.71rem;font-weight:700;padding:.25rem .75rem;border-radius:20px;width:fit-content}
+  .badge-dl{background:#ede9fe;color:#5b21b6}
+  .badge-ml{background:#dcfce7;color:#15803d}
+  .badge-iot{background:#fef3c7;color:#92400e}
+  .proj-title{font-size:1.05rem;font-weight:800;color:var(--navy)}
+  .proj-desc{font-size:.875rem;color:var(--gray);line-height:1.75}
+  .proj-meta{font-size:.78rem;color:var(--accent);font-weight:700;margin-top:auto;padding-top:.5rem;border-top:1px solid var(--border)}
+
+  /* ── PUBLICATIONS ── */
+  .pub-card{background:var(--light);border-left:4px solid var(--accent);border-radius:10px;padding:1.5rem 1.7rem;margin-bottom:1.3rem;
+    transition:transform .25s,box-shadow .25s}
+  .pub-card:hover{transform:translateX(5px);box-shadow:0 6px 22px rgba(37,99,235,.1)}
+  .pub-card.under-review{border-left-color:#94a3b8}
+  .pub-title{font-size:.96rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+  .pub-authors{font-size:.84rem;color:var(--gray);margin-bottom:.4rem}
+  .pub-venue{font-size:.82rem;color:var(--accent);font-weight:600;margin-bottom:.4rem}
+  .pub-card.under-review .pub-venue{color:#64748b}
+  .pub-doi{font-size:.79rem;color:var(--gray)}
+  .pub-doi a{color:var(--accent);text-decoration:none;border-bottom:1px dashed var(--accent)}
+  .pub-keywords{margin-top:.7rem;display:flex;flex-wrap:wrap;gap:.4rem}
+  .kw{background:#e0e7ff;color:#3730a3;border-radius:12px;padding:.18rem .65rem;font-size:.72rem;font-weight:600}
+  .pub-card.under-review .kw{background:#f1f5f9;color:#475569}
+  .pub-status{display:inline-block;font-size:.72rem;font-weight:700;padding:.2rem .65rem;border-radius:12px;margin-bottom:.5rem}
+  .status-published{background:#dcfce7;color:#15803d}
+  .status-review{background:#fef3c7;color:#92400e}
+
+  /* ── EXPERIENCE ── */
+  #experience{background:var(--light)}
+  .exp-card{background:#fff;border-radius:16px;border:1px solid var(--border);padding:1.9rem;margin-bottom:1.3rem;
+    transition:box-shadow .25s,transform .25s}
+  .exp-card:hover{box-shadow:0 8px 28px rgba(37,99,235,.1);transform:translateY(-3px)}
+  .exp-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.9rem}
+  .exp-role{font-size:1.05rem;font-weight:800;color:var(--navy)}
+  .exp-company{font-size:.9rem;color:var(--accent);font-weight:600;margin-top:.2rem}
+  .exp-date{font-size:.8rem;background:linear-gradient(135deg,#dbeafe,#e0e7ff);color:#1d4ed8;padding:.22rem .8rem;border-radius:20px;font-weight:700}
+  .exp-list{padding-left:1.1rem}
+  .exp-list li{font-size:.875rem;color:var(--gray);margin-bottom:.5rem;line-height:1.7}
+  .exp-list li::marker{color:var(--accent)}
+
+  /* ── CONTACT ── */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
+  .contact-info{display:flex;flex-direction:column;gap:1rem}
+  .contact-item{display:flex;align-items:center;gap:.9rem;font-size:.9rem;color:var(--gray);
+    padding:1rem;background:var(--light);border-radius:12px;border:1px solid var(--border);
+    transition:box-shadow .2s,transform .2s}
+  .contact-item:hover{box-shadow:0 4px 14px rgba(37,99,235,.1);transform:translateY(-2px)}
+  .c-icon{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+  .contact-item a{color:var(--accent);text-decoration:none;font-weight:600;word-break:break-all}
+  .contact-item a:hover{text-decoration:underline}
+  .contact-item div b{display:block;font-size:.73rem;color:var(--gray);font-weight:600;margin-bottom:.15rem;text-transform:uppercase;letter-spacing:.5px}
+  .contact-form{background:var(--light);border-radius:16px;padding:2rem;border:1px solid var(--border)}
+  .form-group{margin-bottom:1.1rem}
+  .form-group label{display:block;font-size:.8rem;font-weight:700;color:var(--navy);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.5px}
+  .form-group input,.form-group textarea{width:100%;border:1.5px solid var(--border);border-radius:9px;padding:.68rem 1rem;font-size:.9rem;font-family:inherit;color:var(--text);outline:none;transition:border .2s,box-shadow .2s;background:#fff}
+  .form-group input:focus,.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+  .form-group textarea{resize:vertical;min-height:110px}
+  .btn-send{width:100%;background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:.8rem;border-radius:10px;font-weight:700;cursor:pointer;border:none;font-size:.95rem;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+  .btn-send:hover{background:linear-gradient(135deg,var(--navy2),#1e4da0);transform:translateY(-2px);box-shadow:0 6px 20px rgba(13,33,73,.25)}
+  .form-msg{text-align:center;font-size:.88rem;font-weight:600;padding:.6rem;border-radius:8px;margin-top:.8rem;display:none}
+  .form-msg.success{background:#dcfce7;color:#15803d;display:block}
+  .form-msg.error{background:#fee2e2;color:#dc2626;display:block}
+
+  /* ── FOOTER ── */
+  footer{background:var(--navy);color:rgba(255,255,255,.55);text-align:center;padding:2rem;font-size:.85rem}
+  footer span{color:#93c5fd;font-weight:600}
+  .footer-links{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.8rem}
+  .footer-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.83rem;transition:color .2s}
+  .footer-links a:hover{color:#93c5fd}
+
+  @media(max-width:720px){
+    .about-grid,.contact-grid{grid-template-columns:1fr}
+    .nav-links{gap:.9rem}
+    .hero-stats{gap:1.5rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">P. Sai <span>Bhargav</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#publications">Research</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="hero-inner">
+    <div class="hero-tag"><div class="pulse-dot"></div> Open to Opportunities</div>
+    <h1 class="hero-name">Patamsetti<br><span>Sai Bhargav</span></h1>
+    <div class="hero-typewriter"><span id="typeText"></span><span class="cursor"></span></div>
+    <p class="hero-sub">Final-year B.Tech ECE student passionate about building intelligent systems that solve real-world problems — from deepfake detection to smart IoT solutions.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">🚀 View My Work</a>
+      <a href="#contact" class="btn btn-outline">✉️ Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">2</div><div class="stat-lbl">Publications</div></div>
+      <div class="stat"><div class="stat-num">3+</div><div class="stat-lbl">Projects</div></div>
+      <div class="stat"><div class="stat-num">95.52%</div><div class="stat-lbl">Best Model Accuracy</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="reveal"><div class="section-label">Who I Am</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="divider"></div></div>
+    <div class="about-grid">
+      <div class="about-text reveal-left">
+        <p>I am a final-year B.Tech student in Electronics and Communication Engineering at Velagapudi Ramakrishna Siddhartha Engineering College (VRSEC), Vijayawada, India.</p>
+        <p>My passion lies at the intersection of deep learning, computer vision, and data science. I thrive on turning complex datasets into meaningful insights and building robust AI-powered systems — from deepfake detection frameworks to smart IoT solutions.</p>
+        <p>I am actively seeking opportunities as a Data Scientist where I can apply my research background, Python expertise, and hands-on ML project experience to drive real-world impact.</p>
+      </div>
+      <div class="about-details stagger reveal-right">
+        <div class="detail-row"><div class="detail-icon">🎓</div><div><b>Degree</b>B.Tech — Electronics & Communication Engineering</div></div>
+        <div class="detail-row"><div class="detail-icon">🏛️</div><div><b>Institution</b>VRSEC, Kanuru, Vijayawada, India</div></div>
+        <div class="detail-row"><div class="detail-icon">📋</div><div><b>Student ID</b>228W1A04A6</div></div>
+        <div class="detail-row"><div class="detail-icon">📌</div><div><b>Location</b>Vijayawada, Andhra Pradesh, India</div></div>
+        <div class="detail-row"><div class="detail-icon">🔬</div><div><b>Research Focus</b>Deep Learning · Computer Vision · AI Detection</div></div>
+        <div class="detail-row"><div class="detail-icon">👨‍🏫</div><div><b>Faculty Advisor</b>G. Venkatasubbaiah</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="reveal"><div class="section-label">What I Know</div>
+    <h2 class="section-title">Skills & Technologies</h2>
+    <div class="divider"></div></div>
+    <div class="skills-grid stagger">
+      <div class="skill-card"><h4><span>💻</span> Languages</h4><div class="tags"><span class="tag">Python</span><span class="tag">C</span><span class="tag">MySQL</span></div></div>
+      <div class="skill-card"><h4><span>📦</span> Libraries & Frameworks</h4><div class="tags"><span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">Scikit-learn</span><span class="tag">NLTK</span><span class="tag">OpenCV</span></div></div>
+      <div class="skill-card"><h4><span>🧠</span> Deep Learning</h4><div class="tags"><span class="tag">EfficientNetV2</span><span class="tag">TinyViT</span><span class="tag">XResNet50</span><span class="tag">Transfer Learning</span><span class="tag">Vision Transformers</span></div></div>
+      <div class="skill-card"><h4><span>🛠️</span> Tools & Platforms</h4><div class="tags"><span class="tag">Git</span><span class="tag">LaTeX</span><span class="tag">Jupyter</span><span class="tag">IoT / NodeMCU</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="reveal"><div class="section-label">What I've Built</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="divider"></div></div>
+    <div class="projects-grid stagger">
+      <div class="proj-card">
+        <div class="proj-badge badge-dl">Deep Learning</div>
+        <div class="proj-title">Deep Fake Shield</div>
+        <div class="proj-desc">A hybrid deep learning framework for robust detection of AI-generated and manually manipulated facial images. Combines EfficientNetV2 and TinyViT-21M with a 1088-dimensional fused feature descriptor.</div>
+        <div class="proj-meta">✅ 95.52% Test Accuracy · OpenForensics Dataset · Major B.Tech Project</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-badge badge-ml">Machine Learning</div>
+        <div class="proj-title">Movie Recommendation System</div>
+        <div class="proj-desc">Content-based and collaborative filtering recommendation engine using cosine similarity. Built with Python, Pandas, Scikit-learn, and NLTK to deliver personalized movie suggestions.</div>
+        <div class="proj-meta">🎬 Cosine Similarity · Collaborative Filtering · NLP</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-badge badge-ml">Deep Learning</div>
+        <div class="proj-title">Kidney Stone Detection</div>
+        <div class="proj-desc">Medical image classification system using XResNet50 to detect kidney stones from CT scans, with confusion matrix and ROC curve analysis for robust diagnostic evaluation.</div>
+        <div class="proj-meta">🏥 XResNet50 · Medical Imaging · Binary Classification</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-badge badge-iot">IoT</div>
+        <div class="proj-title">Smart Aquarium Temperature Control</div>
+        <div class="proj-desc">IoT-based system using NodeMCU and DS18B20 sensors for real-time aquarium temperature monitoring with automated regulation and manual mobile control via Blynk app. Published at ICECMSN 2025.</div>
+        <div class="proj-meta">📡 NodeMCU · DS18B20 · Blynk App · IEEE Published</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="container">
+    <div class="reveal"><div class="section-label">Research</div>
+    <h2 class="section-title">Publications</h2>
+    <div class="divider"></div></div>
+
+    <div class="pub-card reveal">
+      <div class="pub-status status-published">✅ Published — IEEE</div>
+      <div class="pub-title">Design and Development of an IoT-based Smart Aquarium Water Temperature Control System with Automatic and Mobile Application-based Manual Regulation</div>
+      <div class="pub-authors">P. S. Bhargav, G. Venkatasubbaiah, P. N. Sai and U. Anuspandana</div>
+      <div class="pub-venue">2025 5th International Conference on Evolutionary Computing and Mobile Sustainable Networks (ICECMSN) · Coimbatore, India · pp. 1495–1500</div>
+      <div class="pub-doi">DOI: <a href="https://doi.org/10.1109/ICECMSN68058.2025.11383075" target="_blank">10.1109/ICECMSN68058.2025.11383075</a></div>
+      <div class="pub-keywords">
+        <span class="kw">IoT</span><span class="kw">NodeMCU</span><span class="kw">DS18B20 Sensor</span><span class="kw">Blynk App</span><span class="kw">Real-time Monitoring</span><span class="kw">Automated Control</span><span class="kw">Temperature Control</span><span class="kw">Aquarium Management</span>
+      </div>
+    </div>
+
+    <div class="pub-card under-review reveal">
+      <div class="pub-status status-review">🕐 Accepted for Presentation</div>
+      <div class="pub-title">Deep Fake Shield: A Hybrid Deep Learning-Based Framework for Robust Detection of AI-Generated and Manually Manipulated Facial Images</div>
+      <div class="pub-authors">P. S. Bhargav et al.</div>
+      <div class="pub-venue">2nd International Conference on Next Generation Electronics (NELeX 2026) · Organized by SENSE, Tamil Nadu, India</div>
+      <div class="pub-keywords">
+        <span class="kw">EfficientNetV2</span><span class="kw">TinyViT</span><span class="kw">Deepfake Detection</span><span class="kw">OpenForensics</span><span class="kw">Computer Vision</span><span class="kw">Transfer Learning</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="reveal"><div class="section-label">Industry Exposure</div>
+    <h2 class="section-title">Experience & Internships</h2>
+    <div class="divider"></div></div>
+    <div class="exp-card reveal">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Machine Learning Intern</div>
+          <div class="exp-company">SkillDzire</div>
+        </div>
+        <div class="exp-date">2026</div>
+      </div>
+      <ul class="exp-list">
+        <li>Developed a <strong>Movie Recommendation System</strong> using content-based filtering and collaborative filtering with cosine similarity and NLP pipelines (Python, Pandas, NLTK).</li>
+        <li>Built a <strong>Kidney Stone Detection</strong> model using XResNet50 with evaluation metrics including confusion matrix and ROC curve analysis on CT scan images.</li>
+        <li>Prepared detailed technical documentation for both projects in LaTeX and DOCX formats with embedded visualizations and results analysis.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal"><div class="section-label">Let's Connect</div>
+    <h2 class="section-title">Contact Me</h2>
+    <div class="divider"></div></div>
+    <div class="contact-grid">
+      <div class="contact-info reveal-left">
+        <p style="color:var(--gray);font-size:.94rem;line-height:1.8;margin-bottom:.5rem">I'm actively looking for Data Scientist roles. Have an opportunity or just want to connect? I'd love to hear from you!</p>
+        <div class="contact-item"><div class="c-icon">📧</div><div><b>Email</b><a href="mailto:bhargavpattemsetti@gmail.com">bhargavpattemsetti@gmail.com</a></div></div>
+        <div class="contact-item"><div class="c-icon">🔗</div><div><b>LinkedIn</b><a href="https://www.linkedin.com/in/bhargav44/" target="_blank">linkedin.com/in/bhargav44</a></div></div>
+        <div class="contact-item"><div class="c-icon">🐙</div><div><b>GitHub</b><a href="https://github.com/Bhargav4480" target="_blank">github.com/Bhargav4480</a></div></div>
+        <div class="contact-item"><div class="c-icon">📍</div><div><b>Location</b>Vijayawada, Andhra Pradesh, India</div></div>
+      </div>
+      <div class="contact-form reveal-right">
+        <div class="form-group"><label>Your Name</label><input type="text" id="senderName" placeholder="John Doe"/></div>
+        <div class="form-group"><label>Your Email</label><input type="email" id="senderEmail" placeholder="john@example.com"/></div>
+        <div class="form-group"><label>Subject</label><input type="text" id="senderSubject" placeholder="Job Opportunity / Collaboration"/></div>
+        <div class="form-group"><label>Message</label><textarea id="senderMsg" placeholder="Hi Bhargav, I'd like to connect..."></textarea></div>
+        <button class="btn-send" id="sendBtn" onclick="sendEmail()">✉️ Send Message</button>
+        <div class="form-msg" id="formMsg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/bhargav44/" target="_blank">LinkedIn</a>
+    <a href="https://github.com/Bhargav4480" target="_blank">GitHub</a>
+    <a href="mailto:bhargavpattemsetti@gmail.com">Email</a>
+  </div>
+  <p>© 2026 <span>Patamsetti Sai Bhargav</span> · Vijayawada, India · Built with purpose</p>
+</footer>
+
+<script>
+/* ── TYPEWRITER ── */
+const roles = ["Aspiring Data Scientist","Deep Learning Researcher","ML Engineer","Python Developer"];
+let ri=0,ci=0,del=false;
+const el=document.getElementById('typeText');
+function type(){
+  const cur=roles[ri];
+  el.textContent=del?cur.slice(0,ci--):cur.slice(0,ci++);
+  if(!del&&ci>cur.length){del=true;setTimeout(type,1400);return}
+  if(del&&ci<0){del=false;ri=(ri+1)%roles.length;ci=0}
+  setTimeout(type,del?55:90);
+}
+type();
+
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.stagger').forEach(el=>obs.observe(el));
+
+/* ── CONTACT FORM via Formspree ── */
+async function sendEmail(){
+  const name=document.getElementById('senderName').value.trim();
+  const email=document.getElementById('senderEmail').value.trim();
+  const subject=document.getElementById('senderSubject').value.trim();
+  const msg=document.getElementById('senderMsg').value.trim();
+  const msgEl=document.getElementById('formMsg');
+  const btn=document.getElementById('sendBtn');
+  if(!name||!email||!msg){
+    msgEl.className='form-msg error';
+    msgEl.textContent='⚠️ Please fill in all required fields.';return;
+  }
+  btn.textContent='Sending...';btn.disabled=true;
+  try{
+    const res=await fetch('https://formspree.io/f/xnnvjewq',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name,email,subject,message:msg,_replyto:email})
+    });
+    if(res.ok){
+      msgEl.className='form-msg success';
+      msgEl.textContent='✅ Message sent! Bhargav will get back to you soon.';
+      document.getElementById('senderName').value='';
+      document.getElementById('senderEmail').value='';
+      document.getElementById('senderSubject').value='';
+      document.getElementById('senderMsg').value='';
+    }else{
+      throw new Error();
+    }
+  }catch{
+    msgEl.className='form-msg error';
+    msgEl.textContent='❌ Something went wrong. Please email directly at bhargavpattemsetti@gmail.com';
+  }
+  btn.textContent='✉️ Send Message';btn.disabled=false;
+}
+</script>
+</body>
+</html>
