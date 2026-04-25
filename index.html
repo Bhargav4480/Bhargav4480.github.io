@@ -425,7 +425,7 @@ async function sendEmail(){
   }
   btn.textContent='Sending...';btn.disabled=true;
   try{
-    const res=await fetch('https://formspree.io/f/xnnvjewq',{
+    const res=await fetch('https://formspree.io/f/xlgazykz',{
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({name,email,subject,message:msg,_replyto:email})
